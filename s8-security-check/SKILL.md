@@ -164,27 +164,19 @@ Previous review: [filename or "none"]
 
 ## Step 6 — Skill improvement reflection (optional)
 
-A security review sometimes reveals friction that isn't a code finding at
-all — ARCHITECTURE.md (from /s1-architect) didn't document the threat
-surface clearly enough to scope the review, or a category in this skill's
-own checklist doesn't fit this kind of project, or CLAUDE.md conventions
-contradicted a security rule you needed to check against. That's worth
-capturing the same way /s6-stage-documenting captures process friction after
-a stage.
-
-Same bar as there: **skip silently if nothing significant came up** — most
-reviews will have nothing to add here even when they have plenty of security
-findings. If something does clear the bar, append to
-`docs/skills-improvement-ideas.md`:
+Same idea and bar as /s6-stage-documenting Step 9: if this review surfaced
+friction in the *process* rather than a code finding — ARCHITECTURE.md not
+documenting the threat surface clearly, a checklist category that didn't fit
+this project — log it (skip silently if nothing came up):
 
 ```
 ## YYYY-MM-DD — Security check
-Skill(s): [which skill this concerns, e.g. "s1-architect" or "s8-security-check" itself]
-Observation: [what happened, concretely]
-Suggested improvement: [a concrete idea, or "not sure — flagging for discussion"]
+Skill(s): [...]
+Observation: [...]
+Suggested improvement: [...]
 ```
 
-Append-only, same as elsewhere — `/s9-skill-retro` is the only consumer.
+Append to `docs/skills-improvement-ideas.md`. `/s9-skill-retro` is the only consumer.
 
 ## Important Constraints
 

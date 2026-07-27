@@ -284,15 +284,10 @@ Across this stage's cycle (/s3-stage-detailed-plan, /s4-stage-execution,
 themselves behaved get in the way, feel repetitive, or produce a worse result
 than it should have?
 
-**Look upstream too, not just at this stage's own steps.** Friction during
-execution or review often traces back further than it first appears — a task
-turned out to be poorly scoped because /s2-planing-stages sized the stage
-wrong, or a decision during implementation revealed that /s1-architect's
-ARCHITECTURE.md was ambiguous or missing something. Those are just as valid
-an observation as friction within this stage's own cycle, even though
-architect and planing-stages ran earlier in the project rather than during
-this specific stage — don't limit yourself to s3-s6 just because those are
-the skills that ran most recently.
+**This includes friction that traces back to /s1-architect or
+/s2-planing-stages** — a poorly-sized stage or an ambiguous ARCHITECTURE.md
+section often only becomes visible during execution, even though those
+skills ran earlier in the project.
 
 This is a lightweight retrospective, not a formal audit — closer to a sprint
 retro than a code review. Most stages will have nothing worth noting here,
@@ -306,9 +301,7 @@ they don't exist):
 
 ```
 ## YYYY-MM-DD — Stage X
-Skill(s): [which of s1-s8 this concerns — including upstream ones, e.g.
-  "s4-stage-execution", "s3 + s5", or "s1-architect (ARCHITECTURE.md gap
-  found during execution)"]
+Skill(s): [which of s1-s8 this concerns, e.g. "s4-stage-execution" or "s1-architect"]
 Observation: [what happened, concretely — quote the confusing instruction or
   describe the repeated pattern]
 Suggested improvement: [a concrete idea, or "not sure — flagging for

@@ -287,28 +287,19 @@ Based on findings:
 
 ## Step 6 — Skill improvement reflection (optional)
 
-An audit like this one tends to surface not just drift in the code, but
-friction in the *documents and process* that made drift hard to spot or hard
-to prevent. If, while auditing, you noticed something like ARCHITECTURE.md
-(from /s1-architect) being too vague to check a given item against, or a
-Structural Requirement that's impossible to verify statically, or a stage
-boundary from /s2-planing-stages that made the audit's scope unclear — that's
-worth capturing, the same way /s6-stage-documenting captures process friction
-after a stage.
-
-Same bar as there: **skip silently if nothing significant came up** — this
-audit will often find zero process-level issues even when it finds plenty of
-code deviations, and that's fine. If something does clear the bar, append to
-`docs/skills-improvement-ideas.md`:
+Same idea and bar as /s6-stage-documenting Step 9: if this audit surfaced
+friction in the *process* rather than the code — ARCHITECTURE.md too vague
+to check something against, a Structural Requirement impossible to verify
+statically — log it (skip silently if nothing came up):
 
 ```
 ## YYYY-MM-DD — Architecture audit
-Skill(s): [which skill this concerns, e.g. "s1-architect" or "s7-architecture-audit" itself]
-Observation: [what happened, concretely]
-Suggested improvement: [a concrete idea, or "not sure — flagging for discussion"]
+Skill(s): [...]
+Observation: [...]
+Suggested improvement: [...]
 ```
 
-Append-only, same as elsewhere — `/s9-skill-retro` is the only consumer.
+Append to `docs/skills-improvement-ideas.md`. `/s9-skill-retro` is the only consumer.
 
 ## Constraints
 
