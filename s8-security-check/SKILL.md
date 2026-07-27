@@ -162,9 +162,35 @@ Previous review: [filename or "none"]
 > [If CRITICAL]: Do not release. Fix critical findings and re-run /s8-security-check.
 ```
 
+## Step 6 — Skill improvement reflection (optional)
+
+A security review sometimes reveals friction that isn't a code finding at
+all — ARCHITECTURE.md (from /s1-architect) didn't document the threat
+surface clearly enough to scope the review, or a category in this skill's
+own checklist doesn't fit this kind of project, or CLAUDE.md conventions
+contradicted a security rule you needed to check against. That's worth
+capturing the same way /s6-stage-documenting captures process friction after
+a stage.
+
+Same bar as there: **skip silently if nothing significant came up** — most
+reviews will have nothing to add here even when they have plenty of security
+findings. If something does clear the bar, append to
+`docs/skills-improvement-ideas.md`:
+
+```
+## YYYY-MM-DD — Security check
+Skill(s): [which skill this concerns, e.g. "s1-architect" or "s8-security-check" itself]
+Observation: [what happened, concretely]
+Suggested improvement: [a concrete idea, or "not sure — flagging for discussion"]
+```
+
+Append-only, same as elsewhere — `/s9-skill-retro` is the only consumer.
+
 ## Important Constraints
 
 - **DO NOT fix any code.** Report findings only.
-- **DO NOT block or modify any other skill's files.**
+- **DO NOT block or modify any other skill's files.** The one exception is
+  Step 6, which may append to docs/skills-improvement-ideas.md, same as
+  /s6-stage-documenting and /s7-architecture-audit.
 - Previous reviews in `security/` are **read-only** — never modify them. Each run produces a new dated file.
 - If verdict is **CRITICAL**, state clearly: do not release until fixed.

@@ -1,15 +1,16 @@
 ---
 name: s9-skill-retro
-description: "Periodic, manually-invoked skill that turns accumulated entries in docs/skills-improvement-ideas.md into concrete, proposed edits to the affected dev-workflow skills (s1-s8). It only proposes — it never edits a skill file without explicit approval. Trigger on: /s9-skill-retro, 'process the skill improvement ideas', 'let's review the skills-improvement-ideas file', 'turn our retro notes into skill changes'. Do NOT trigger automatically — explicit invocation only, typically at the end of a project or whenever the user wants to catch up on accumulated ideas."
+description: "Periodic, manually-invoked skill that turns accumulated entries in docs/skills-improvement-ideas.md — logged by s6-stage-documenting, s7-architecture-audit, and s8-security-check — into concrete, proposed edits to the affected dev-workflow skills (s1-s8). It only proposes — it never edits a skill file without explicit approval. Trigger on: /s9-skill-retro, 'process the skill improvement ideas', 'let's review the skills-improvement-ideas file', 'turn our retro notes into skill changes'. Do NOT trigger automatically — explicit invocation only, typically at the end of a project or whenever the user wants to catch up on accumulated ideas."
 ---
 
 # Skill Retro
 
-Your job is to take the retrospective notes that `/s6-stage-documenting` has
-been quietly accumulating in `docs/skills-improvement-ideas.md` — one small
-observation per stage, easy to make and easy to forget — and turn them into
-something someone can actually act on: a concrete, ready-to-review change to
-the skill file that caused the friction.
+Your job is to take the retrospective notes that `/s6-stage-documenting`,
+`/s7-architecture-audit`, and `/s8-security-check` have been quietly
+accumulating in `docs/skills-improvement-ideas.md` — one small observation
+at a time, easy to make and easy to forget — and turn them into something
+someone can actually act on: a concrete, ready-to-review change to the skill
+file that caused the friction.
 
 **The core rule, same as `/s7-architecture-audit`: you propose, you do not
 apply.** A skill file is a shared asset used across many projects and
@@ -24,14 +25,20 @@ Look for `docs/skills-improvement-ideas.md` in the project root.
 - If it doesn't exist or has no unprocessed entries (see Step 5 for how
   entries get marked processed), tell the user: "No unprocessed skill
   improvement ideas found in this project." and stop.
-- Otherwise, read all unprocessed entries. Each has the format written by
-  `/s6-stage-documenting`:
+- Otherwise, read all unprocessed entries. Each has the same shape, whether
+  it came from `/s6-stage-documenting` (`## YYYY-MM-DD — Stage X`),
+  `/s7-architecture-audit` (`## YYYY-MM-DD — Architecture audit`), or
+  `/s8-security-check` (`## YYYY-MM-DD — Security check`):
   ```
-  ## YYYY-MM-DD — Stage X
+  ## YYYY-MM-DD — [Stage X | Architecture audit | Security check]
   Skill(s): [...]
   Observation: [...]
   Suggested improvement: [...]
   ```
+  The header's second half tells you *when* the observation was made, not
+  which skill it's about — always group by the `Skill(s):` field (Step 2),
+  since an entry logged during a security check might still be about
+  `s1-architect`, for instance.
 
 ## Step 2 — Group by affected skill
 
@@ -112,8 +119,9 @@ the next run doesn't re-surface them either.
 
 ## How this connects to the workflow
 
-- `/s6-stage-documenting` writes `docs/skills-improvement-ideas.md` — this
-  skill is the only consumer of that file.
+- `/s6-stage-documenting`, `/s7-architecture-audit`, and `/s8-security-check`
+  all write to `docs/skills-improvement-ideas.md` — this skill is the only
+  consumer of that file.
 - This skill can touch any skill in the s1-s8 family (or others) depending
   on what the accumulated ideas point at — it is not tied to a single step.
 - Typically run once at the end of a project, or whenever the user wants to

@@ -285,6 +285,31 @@ Based on findings:
   memory — accepted architectural decisions belong there."
 - **Many UNDOCUMENTED items:** "Investigate undocumented files before proceeding — they may indicate scope creep or accidental drift."
 
+## Step 6 — Skill improvement reflection (optional)
+
+An audit like this one tends to surface not just drift in the code, but
+friction in the *documents and process* that made drift hard to spot or hard
+to prevent. If, while auditing, you noticed something like ARCHITECTURE.md
+(from /s1-architect) being too vague to check a given item against, or a
+Structural Requirement that's impossible to verify statically, or a stage
+boundary from /s2-planing-stages that made the audit's scope unclear — that's
+worth capturing, the same way /s6-stage-documenting captures process friction
+after a stage.
+
+Same bar as there: **skip silently if nothing significant came up** — this
+audit will often find zero process-level issues even when it finds plenty of
+code deviations, and that's fine. If something does clear the bar, append to
+`docs/skills-improvement-ideas.md`:
+
+```
+## YYYY-MM-DD — Architecture audit
+Skill(s): [which skill this concerns, e.g. "s1-architect" or "s7-architecture-audit" itself]
+Observation: [what happened, concretely]
+Suggested improvement: [a concrete idea, or "not sure — flagging for discussion"]
+```
+
+Append-only, same as elsewhere — `/s9-skill-retro` is the only consumer.
+
 ## Constraints
 
 - **Do not fix anything.** Your job is to report. If you spot a bug or
@@ -304,4 +329,6 @@ Based on findings:
 - Complements /s5-stage-review (per-stage diff) — not a replacement for it
 - If deviations found: user decides whether to fix (back to /s4-stage-execution)
   or accept and update ARCHITECTURE.md
-- Does not write to any project files — output is reported to user only
+- Does not write to any project files about the codebase — output on that
+  front is reported to user only. The one exception is Step 6, which may
+  append to docs/skills-improvement-ideas.md, same as /s6-stage-documenting.
