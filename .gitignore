@@ -1,0 +1,21 @@
+# secrets
+.env
+*.env
+.env.*
+!.env.template
+*.pem
+*.key
+credentials.json
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# editor files
+.idea/
+.vscode/
+
+# python/node cruft in case scripts get added later
+__pycache__/
+node_modules/
+.venv/

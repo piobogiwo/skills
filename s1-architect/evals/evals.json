@@ -1,0 +1,134 @@
+{
+  "skill_name": "s1-architect",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "I want to add real-time notifications to my existing FastAPI + React app. Users should get notified when their invoice is processed. We use PostgreSQL. Where do we start?",
+      "expected_output": "ARCHITECTURE.md with Problem Statement, Goals, Constraints, Current State, Target Architecture (components + mermaid data flow diagram), Technology Choices for real-time transport (WebSocket/SSE/polling), General Implementation Plan, Out of Scope, Risks & Open Questions, and Next Step instructions. Status: draft.",
+      "assertions": [
+        {
+          "id": "architecture_md_created",
+          "text": "ARCHITECTURE.md file exists in the working directory",
+          "type": "file_exists"
+        },
+        {
+          "id": "status_draft",
+          "text": "ARCHITECTURE.md contains 'Status: draft'",
+          "type": "file_contains"
+        },
+        {
+          "id": "has_mermaid",
+          "text": "ARCHITECTURE.md contains a mermaid diagram (```mermaid block)",
+          "type": "file_contains"
+        },
+        {
+          "id": "has_out_of_scope",
+          "text": "ARCHITECTURE.md has an 'Out of Scope' section",
+          "type": "file_contains"
+        },
+        {
+          "id": "technology_choice_explained",
+          "text": "ARCHITECTURE.md explains the technology choice for real-time transport (WebSocket, SSE, or polling) with rationale",
+          "type": "llm_judge"
+        },
+        {
+          "id": "implementation_plan_present",
+          "text": "ARCHITECTURE.md has a General Implementation Plan section with ordered steps",
+          "type": "llm_judge"
+        },
+        {
+          "id": "next_step_instruction",
+          "text": "ARCHITECTURE.md tells the user to change Status to approved and run /s2-planing-stages",
+          "type": "file_contains"
+        }
+      ],
+      "files": []
+    },
+    {
+      "id": 1,
+      "prompt": "let's design the architecture for a multi-tenant billing system. we're building this into our existing django app (postgres, celery for async). each tenant needs separate invoices, payment history, subscription tiers. we're thinking stripe. what should this look like?",
+      "expected_output": "ARCHITECTURE.md covering the billing system design: tenant isolation approach, Stripe integration architecture, subscription/invoice/payment data model, async job design for payment processing, components with responsibilities, mermaid data flow, and a high-level implementation sequence. Status: draft.",
+      "assertions": [
+        {
+          "id": "architecture_md_created",
+          "text": "ARCHITECTURE.md file exists",
+          "type": "file_exists"
+        },
+        {
+          "id": "status_draft",
+          "text": "ARCHITECTURE.md contains 'Status: draft'",
+          "type": "file_contains"
+        },
+        {
+          "id": "has_mermaid",
+          "text": "ARCHITECTURE.md has a mermaid diagram",
+          "type": "file_contains"
+        },
+        {
+          "id": "addresses_multi_tenancy",
+          "text": "ARCHITECTURE.md addresses multi-tenant isolation (how data is separated between tenants)",
+          "type": "llm_judge"
+        },
+        {
+          "id": "stripe_integration_addressed",
+          "text": "ARCHITECTURE.md addresses Stripe integration (webhooks, payment flow, or subscription management)",
+          "type": "llm_judge"
+        },
+        {
+          "id": "has_components_section",
+          "text": "ARCHITECTURE.md has a Components section listing distinct parts with responsibilities",
+          "type": "llm_judge"
+        },
+        {
+          "id": "has_out_of_scope",
+          "text": "ARCHITECTURE.md has an Out of Scope section",
+          "type": "file_contains"
+        }
+      ],
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "/s1-architect — I need to migrate our Node.js REST API to GraphQL. It's an Express app with about 15 endpoints, MongoDB, and a React frontend that does a lot of over-fetching. We can't break existing clients during migration.",
+      "expected_output": "ARCHITECTURE.md for the REST-to-GraphQL migration: migration strategy (schema-first design, coexistence period), Apollo Server setup, resolver architecture, backwards compatibility approach for existing REST clients, data loader pattern for N+1 prevention, phased implementation plan. Status: draft.",
+      "assertions": [
+        {
+          "id": "architecture_md_created",
+          "text": "ARCHITECTURE.md file exists",
+          "type": "file_exists"
+        },
+        {
+          "id": "status_draft",
+          "text": "ARCHITECTURE.md contains 'Status: draft'",
+          "type": "file_contains"
+        },
+        {
+          "id": "has_mermaid",
+          "text": "ARCHITECTURE.md contains a mermaid diagram",
+          "type": "file_contains"
+        },
+        {
+          "id": "backwards_compat_addressed",
+          "text": "ARCHITECTURE.md addresses the backwards compatibility constraint (existing clients must not break)",
+          "type": "llm_judge"
+        },
+        {
+          "id": "migration_strategy",
+          "text": "ARCHITECTURE.md has a migration strategy (e.g., parallel running, strangler fig, or phased cutover)",
+          "type": "llm_judge"
+        },
+        {
+          "id": "risks_section",
+          "text": "ARCHITECTURE.md has a Risks & Open Questions section with at least one concrete risk",
+          "type": "llm_judge"
+        },
+        {
+          "id": "next_step_instruction",
+          "text": "ARCHITECTURE.md tells the user to approve and run /s2-planing-stages",
+          "type": "file_contains"
+        }
+      ],
+      "files": []
+    }
+  ]
+}

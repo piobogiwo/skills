@@ -1,0 +1,90 @@
+{
+  "skill_name": "excalidraw-diagram",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "Narysuj diagram architektury llama.cpp — styl nieformalny. Pokaż główne komponenty: parser wag (GGUF loader), model context, inference pipeline (prefill → decode), sampling, wyjście tekstowe. Połącz je strzałkami pokazując przepływ danych.",
+      "expected_output": "Diagram w Excalidraw (http://localhost:3001) z węzłami o roughness:1, etykietami jako pola text na kształtach, fontFamily:1. Strzałki przez startElementId/endElementId. Screenshot potwierdzający wynik.",
+      "assertions": [
+        {
+          "name": "uses_batch_create_elements_not_mermaid",
+          "description": "Skill uses batch_create_elements and NOT create_from_mermaid"
+        },
+        {
+          "name": "calls_clear_canvas_first",
+          "description": "clear_canvas is called before drawing"
+        },
+        {
+          "name": "verifies_with_screenshot",
+          "description": "get_canvas_screenshot is called after drawing to verify"
+        },
+        {
+          "name": "reports_url",
+          "description": "Response mentions http://localhost:3001"
+        },
+        {
+          "name": "informal_style_roughness",
+          "description": "Elements use roughness:1 (informal style)"
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "prompt": "Zwizualizuj w Excalidraw pipeline CI/CD, styl formalny. Etapy: commit do repo → lint (ESLint) → build (Docker image) → testy jednostkowe → testy integracyjne → deploy staging → smoke test → deploy prod. Zaznacz kolorami: zielony = kroki build, turkusowy = testy, niebieski = deploy.",
+      "expected_output": "Formalny diagram (roughness:0) z węzłami BEZ embedded text i osobnymi elementami type:text z fontFamily:2. Strzałki auto-routowane. Kolory zgodne z paletą. Screenshot potwierdzający.",
+      "assertions": [
+        {
+          "name": "uses_batch_create_elements_not_mermaid",
+          "description": "Skill uses batch_create_elements and NOT create_from_mermaid"
+        },
+        {
+          "name": "calls_clear_canvas_first",
+          "description": "clear_canvas is called before drawing"
+        },
+        {
+          "name": "verifies_with_screenshot",
+          "description": "get_canvas_screenshot is called after drawing to verify"
+        },
+        {
+          "name": "formal_style_separate_text_elements",
+          "description": "Uses separate type:text elements (not embedded labels on shapes) for formal font"
+        },
+        {
+          "name": "formal_style_roughness_zero",
+          "description": "Elements use roughness:0 (formal style)"
+        },
+        {
+          "name": "reports_url",
+          "description": "Response mentions http://localhost:3001"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Pokaż jako diagram w Excalidraw Docker stack mojej aplikacji: serwis API (port 8080), PostgreSQL (port 5432), Redis cache (port 6379). API łączy się z oboma bazami. Nginx (port 80) przed API. Nie mówię jaki styl — sam zdecyduj i zapytaj.",
+      "expected_output": "Skill pyta o styl (formalny/nieformalny) jeśli nie podano. Następnie rysuje diagram z 4 węzłami + strzałkami. Screenshot potwierdzający. URL.",
+      "assertions": [
+        {
+          "name": "asks_about_style_when_not_specified",
+          "description": "Skill asks user about formal/informal style since it was not specified"
+        },
+        {
+          "name": "uses_batch_create_elements_not_mermaid",
+          "description": "Skill uses batch_create_elements and NOT create_from_mermaid"
+        },
+        {
+          "name": "calls_clear_canvas_first",
+          "description": "clear_canvas is called before drawing"
+        },
+        {
+          "name": "verifies_with_screenshot",
+          "description": "get_canvas_screenshot is called after drawing to verify"
+        },
+        {
+          "name": "reports_url",
+          "description": "Response mentions http://localhost:3001"
+        }
+      ]
+    }
+  ]
+}

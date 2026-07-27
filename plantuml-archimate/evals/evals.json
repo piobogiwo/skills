@@ -1,0 +1,138 @@
+{
+  "skill_name": "plantuml-archimate",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "Stwórz diagram ArchiMate dla systemu DRS (Deposit Return System) pokazujący: użytkownik zwraca butelkę w automacie, automat komunikuje się z systemem centralnym, system centralny weryfikuje kaucję i zwraca pieniądze na konto użytkownika. Pokaż warstwy Business, Application i Technology.",
+      "expected_output": "A .puml file with Business layer (Business_Actor for consumer, Business_Process for return/verify/payback), Application layer (Application_Component for RVM system, central DRS, payment system, Application_Service), Technology layer (Technology_Node for RVM machine, DRS server, payment gateway, Technology_CommunicationNetwork). Correct cross-layer relations (Rel_Serving, Rel_Realization, Rel_Triggering). File saved to /mnt/user-data/outputs/. Rendered SVG/PNG. Brief architectural explanation.",
+      "files": [],
+      "assertions": [
+        {
+          "name": "uses_archimate_include",
+          "description": "The .puml file contains !include <archimate/Archimate>",
+          "check": "file_contains",
+          "value": "!include <archimate/Archimate>"
+        },
+        {
+          "name": "has_business_actor",
+          "description": "Uses Business_Actor macro for the consumer/user",
+          "check": "file_contains",
+          "value": "Business_Actor"
+        },
+        {
+          "name": "has_three_boundaries",
+          "description": "Has at least 3 Boundary blocks for the three layers",
+          "check": "file_contains_count_gte",
+          "value": "Boundary(",
+          "count": 3
+        },
+        {
+          "name": "has_application_component",
+          "description": "Uses Application_Component for at least one application system",
+          "check": "file_contains",
+          "value": "Application_Component"
+        },
+        {
+          "name": "has_technology_node",
+          "description": "Uses Technology_Node for infrastructure nodes",
+          "check": "file_contains",
+          "value": "Technology_Node"
+        },
+        {
+          "name": "has_typed_relations",
+          "description": "Uses typed ArchiMate relations (not generic arrows)",
+          "check": "file_contains",
+          "value": "Rel_"
+        },
+        {
+          "name": "renders_successfully",
+          "description": "plantuml command exits with code 0 and produces an output file",
+          "check": "file_exists_in_output",
+          "value": ".svg or .png"
+        },
+        {
+          "name": "no_c4_include",
+          "description": "Does not incorrectly include C4 library instead of ArchiMate",
+          "check": "file_not_contains",
+          "value": "C4_Context"
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "prompt": "Create an ArchiMate motivation diagram for an e-commerce platform migration project. Show the key stakeholders (CTO, Head of Operations, Compliance Officer), their drivers, business goals, and requirements. The main drivers are: system performance issues, upcoming GDPR audit, and market expansion. Goals include: 99.9% uptime, GDPR compliance by Q3, and entering 3 new markets.",
+      "expected_output": "A .puml file with Motivation layer elements: Motivation_Stakeholder for CTO/Head of Ops/Compliance Officer, Motivation_Driver for performance/GDPR/expansion, Motivation_Goal for uptime/compliance/markets, Motivation_Requirement for specific requirements. Appropriate Rel_Association and Rel_Influence relations. No cross-layer structural relations (this is a motivation-only diagram). File saved and rendered.",
+      "files": [],
+      "assertions": [
+        {
+          "name": "uses_motivation_stakeholder",
+          "description": "Uses Motivation_Stakeholder macro",
+          "check": "file_contains",
+          "value": "Motivation_Stakeholder"
+        },
+        {
+          "name": "uses_motivation_driver",
+          "description": "Uses Motivation_Driver macro",
+          "check": "file_contains",
+          "value": "Motivation_Driver"
+        },
+        {
+          "name": "uses_motivation_goal",
+          "description": "Uses Motivation_Goal macro",
+          "check": "file_contains",
+          "value": "Motivation_Goal"
+        },
+        {
+          "name": "has_influence_or_association",
+          "description": "Uses Rel_Influence or Rel_Association for motivation connections",
+          "check": "file_contains_any",
+          "values": ["Rel_Influence", "Rel_Association"]
+        },
+        {
+          "name": "renders_successfully",
+          "description": "Output image file exists",
+          "check": "file_exists_in_output",
+          "value": ".svg or .png"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Narysuj diagram wdrożeniowy (deployment view) dla aplikacji webowej składającej się z: frontendu React (SPA) serwowanego przez Nginx, backendu Spring Boot na JVM, bazy danych PostgreSQL, i cache Redis. Wszystko działa na dwóch serwerach fizycznych w centrum danych. Pokaż warstwę Technology z artefaktami i oprogramowaniem systemowym.",
+      "expected_output": "A .puml file focused on Technology layer: Technology_Node for physical servers, Technology_SystemSoftware for Nginx/JVM/PostgreSQL/Redis, Technology_Artifact for the deployable artifacts (frontend bundle, spring-boot jar), Technology_Device optionally. Application_Component elements for React SPA and Spring Boot app realized by artifacts. Rel_Composition for node→software, Rel_Serving for software→artifact relationships. File rendered to output.",
+      "files": [],
+      "assertions": [
+        {
+          "name": "uses_technology_node",
+          "description": "Uses Technology_Node for physical servers",
+          "check": "file_contains",
+          "value": "Technology_Node"
+        },
+        {
+          "name": "uses_system_software",
+          "description": "Uses Technology_SystemSoftware for middleware (Nginx, JVM, etc.)",
+          "check": "file_contains",
+          "value": "Technology_SystemSoftware"
+        },
+        {
+          "name": "uses_artifact",
+          "description": "Uses Technology_Artifact for deployable artifacts",
+          "check": "file_contains",
+          "value": "Technology_Artifact"
+        },
+        {
+          "name": "uses_realization_or_composition",
+          "description": "Uses structural relations appropriate for deployment",
+          "check": "file_contains_any",
+          "values": ["Rel_Composition", "Rel_Realization", "Rel_Serving"]
+        },
+        {
+          "name": "renders_successfully",
+          "description": "Output image file exists",
+          "check": "file_exists_in_output",
+          "value": ".svg or .png"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,164 @@
+{
+  "skill_name": "s2-planing-stages",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "/s2-planing-stages — I've approved the architecture for real-time invoice notifications. Please break it into implementation stages.",
+      "expected_output": "IMPLEMENTATION_PLAN.md with Status: draft, ordered stages (including Stage 0 for setup if needed), each stage having Goal/Scope/Size/Depends on/AC summary/Status fields, a mermaid dependency graph, model guidance, and a Next Step telling the user to approve and run /s3-stage-detailed-plan.",
+      "files": ["ARCHITECTURE.md"],
+      "assertions": [
+        {
+          "id": "impl_plan_created",
+          "text": "IMPLEMENTATION_PLAN.md file exists in the outputs",
+          "type": "file_exists"
+        },
+        {
+          "id": "status_draft",
+          "text": "IMPLEMENTATION_PLAN.md contains 'Status: draft'",
+          "type": "file_contains"
+        },
+        {
+          "id": "has_mermaid",
+          "text": "IMPLEMENTATION_PLAN.md contains a mermaid diagram (```mermaid block)",
+          "type": "file_contains"
+        },
+        {
+          "id": "stages_have_ac_summary",
+          "text": "IMPLEMENTATION_PLAN.md contains 'AC summary:' fields",
+          "type": "file_contains"
+        },
+        {
+          "id": "stage_statuses_todo",
+          "text": "IMPLEMENTATION_PLAN.md contains 'Status: todo' for at least one stage",
+          "type": "file_contains"
+        },
+        {
+          "id": "has_size_field",
+          "text": "IMPLEMENTATION_PLAN.md contains size indicators (Size: S, M, or L)",
+          "type": "file_contains"
+        },
+        {
+          "id": "next_step_references_stage_plan",
+          "text": "IMPLEMENTATION_PLAN.md Next Step section instructs user to approve and run /s3-stage-detailed-plan",
+          "type": "llm_judge"
+        },
+        {
+          "id": "stages_logically_ordered",
+          "text": "Stages are logically ordered — DB/schema stages appear before service/API stages, which appear before frontend/UI stages",
+          "type": "llm_judge"
+        },
+        {
+          "id": "stages_well_scoped",
+          "text": "Each stage names specific files or modules in its Scope field (not just generic descriptions like 'backend work')",
+          "type": "llm_judge"
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "prompt": "ok architecture looks good, let's break the billing system into stages so we can start implementing",
+      "expected_output": "IMPLEMENTATION_PLAN.md with Status: draft, well-sequenced stages covering models, Stripe setup, BillingService, webhook handler, Celery tasks, views, and feature gating. Each stage has Goal/Scope/Size/Depends on/AC summary/Status. Mermaid dependency graph. Stages sized appropriately (S/M/L). Next Step instructions.",
+      "files": ["ARCHITECTURE.md"],
+      "assertions": [
+        {
+          "id": "impl_plan_created",
+          "text": "IMPLEMENTATION_PLAN.md file exists in the outputs",
+          "type": "file_exists"
+        },
+        {
+          "id": "status_draft",
+          "text": "IMPLEMENTATION_PLAN.md contains 'Status: draft'",
+          "type": "file_contains"
+        },
+        {
+          "id": "has_mermaid",
+          "text": "IMPLEMENTATION_PLAN.md contains a mermaid diagram",
+          "type": "file_contains"
+        },
+        {
+          "id": "stages_have_ac_summary",
+          "text": "IMPLEMENTATION_PLAN.md contains 'AC summary:' fields",
+          "type": "file_contains"
+        },
+        {
+          "id": "stage_statuses_todo",
+          "text": "IMPLEMENTATION_PLAN.md contains 'Status: todo'",
+          "type": "file_contains"
+        },
+        {
+          "id": "has_size_field",
+          "text": "IMPLEMENTATION_PLAN.md contains size indicators (Size: S, M, or L)",
+          "type": "file_contains"
+        },
+        {
+          "id": "covers_key_components",
+          "text": "The stages collectively cover all major components from the architecture: data models, Stripe integration, BillingService, webhook handler, Celery tasks, and views",
+          "type": "llm_judge"
+        },
+        {
+          "id": "models_before_service",
+          "text": "Data model/migration stage comes before the BillingService or webhook handler stages",
+          "type": "llm_judge"
+        },
+        {
+          "id": "stages_well_scoped",
+          "text": "Each stage names specific files or modules in its Scope field",
+          "type": "llm_judge"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "architecture approved — now create the implementation plan for the REST to GraphQL migration",
+      "expected_output": "IMPLEMENTATION_PLAN.md with Status: draft covering Apollo Server setup, DataLoader infrastructure, schema+resolvers for first resources, Apollo Client on frontend, incremental migration stages, and eventual REST deprecation. Each stage properly sized and scoped. Mermaid graph. Next Step instructions.",
+      "files": ["ARCHITECTURE.md"],
+      "assertions": [
+        {
+          "id": "impl_plan_created",
+          "text": "IMPLEMENTATION_PLAN.md file exists in the outputs",
+          "type": "file_exists"
+        },
+        {
+          "id": "status_draft",
+          "text": "IMPLEMENTATION_PLAN.md contains 'Status: draft'",
+          "type": "file_contains"
+        },
+        {
+          "id": "has_mermaid",
+          "text": "IMPLEMENTATION_PLAN.md contains a mermaid diagram",
+          "type": "file_contains"
+        },
+        {
+          "id": "stages_have_ac_summary",
+          "text": "IMPLEMENTATION_PLAN.md contains 'AC summary:' fields",
+          "type": "file_contains"
+        },
+        {
+          "id": "stage_statuses_todo",
+          "text": "IMPLEMENTATION_PLAN.md contains 'Status: todo'",
+          "type": "file_contains"
+        },
+        {
+          "id": "has_size_field",
+          "text": "IMPLEMENTATION_PLAN.md contains size indicators (Size: S, M, or L)",
+          "type": "file_contains"
+        },
+        {
+          "id": "apollo_server_first",
+          "text": "Apollo Server setup stage appears before schema/resolver stages and before frontend migration stages",
+          "type": "llm_judge"
+        },
+        {
+          "id": "incremental_migration_approach",
+          "text": "The plan reflects an incremental migration (adding GraphQL alongside REST, not replacing all at once)",
+          "type": "llm_judge"
+        },
+        {
+          "id": "stages_well_scoped",
+          "text": "Each stage names specific files or modules in its Scope field",
+          "type": "llm_judge"
+        }
+      ]
+    }
+  ]
+}
