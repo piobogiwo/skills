@@ -96,9 +96,13 @@ Only write to a SKILL.md after the user confirms that specific change. Skip
 or revise per their answer — don't batch-apply everything on one "yes to all"
 unless the user explicitly says that's what they want.
 
-After applying, remind the user this only updated the copy at the path found
-in Step 3 — if they keep synced copies on other machines or an equivalent
-skill for another tool, those need the same change carried over by hand.
+After applying, check whether the file lives inside a git repo (`git -C
+<dir> rev-parse --is-inside-work-tree`) — likely `skills-canonical`, if
+`~/.claude/skills` is linked per its README. If so, commit the change there
+(message referencing the observation it addresses) and push — that's what
+carries it to the other machines. If it's a plain unlinked copy, just remind
+the user this only updated the local copy and they'll need to sync it
+by hand.
 
 After each applied change, mark the corresponding entry(ies) in
 `docs/skills-improvement-ideas.md` as processed — append `[Processed:
