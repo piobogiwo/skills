@@ -3,6 +3,10 @@ name: drs-call-center-powerbi
 description: Ready-to-use skill for querying the "DRS Call Center" Power BI dataset via the powerbi-mcp-reader MCP server. Contains all IDs, table/column/measure/relationship reference, domain context, and validated DAX query templates. Use this skill whenever the user asks about DRS call center data, połączenia, zgłoszenia, rozmowy, clusters, FCR, SLA, worki, kaucja, or any analysis of the DRS deposit return system call center. Always read this skill before writing any DAX or asking the user for IDs.
 ---
 
+Connection/query mechanics (how to reach the MCP, run DAX, etc.) live in
+`powerbi-mcp-skill` — this file is purely the DRS Call Center domain
+knowledge.
+
 ## Connection IDs — never look these up again
 
 ```
