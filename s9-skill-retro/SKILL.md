@@ -98,11 +98,11 @@ unless the user explicitly says that's what they want.
 
 After applying, check whether the file lives inside a git repo (`git -C
 <dir> rev-parse --is-inside-work-tree`) — likely `skills-canonical`, if
-`~/.claude/skills` is linked per its README. If so, commit the change there
-(message referencing the observation it addresses) and push — that's what
-carries it to the other machines. If it's a plain unlinked copy, just remind
-the user this only updated the local copy and they'll need to sync it
-by hand.
+`~/.claude/skills` is linked per its README. If so, use `push-skills-to-git`
+to commit and push the change (it handles pushing to every configured
+remote, not just one) — reference the observation it addresses in the
+commit message. If it's a plain unlinked copy, just remind the user this
+only updated the local copy and they'll need to sync it by hand.
 
 After each applied change, mark the corresponding entry(ies) in
 `docs/skills-improvement-ideas.md` as processed — append `[Processed:

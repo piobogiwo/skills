@@ -3,6 +3,10 @@
 Single source of truth for shared Claude Code / Codex skills, synced across
 Laptop (Windows), Spark (Ubuntu), and Arch (Arch Linux) via this repo.
 
+Pushed to two remotes so a loss of one doesn't lose the history:
+- `origin` — https://github.com/piobogiwo/skills.git (personal)
+- `gitlab` — https://gitlab.mparagon.pl/src-hurtownia/skills.git (work)
+
 ## How it works
 
 Each machine clones this repo to `~/skills-canonical` (on Windows:
@@ -36,20 +40,26 @@ mklink /J "C:\Users\<you>\.claude\skills" "C:\PIOTR\skills-canonical"
 
 Manual, on purpose - no background auto-pull. Whenever you want the latest:
 ```bash
-git -C ~/skills-canonical pull
+git -C ~/skills-canonical fetch --all && git -C ~/skills-canonical merge --ff-only origin/main
 ```
-or just ask Claude to run the `sync-skills` skill (`/sync-skills`), which
-does the same pull and reports what changed.
+or just ask Claude to run the `pull-skills-from-git` skill
+(`/pull-skills-from-git`), which does the same and also checks whether
+`origin` and `gitlab` have drifted apart from each other before merging.
 
 ## Making changes
 
 Edit skills directly under `~/skills-canonical` (or `C:\PIOTR\skills-canonical`
-on Windows), then commit and push from whichever machine you're on:
+on Windows), then commit and push to **both** remotes from whichever machine
+you're on:
 ```bash
 cd ~/skills-canonical
-git add -A && git commit -m "..." && git push
+git add -A && git commit -m "..."
+git push origin main
+git push gitlab main
 ```
-Pull on the other machines to pick it up.
+or ask Claude to run `push-skills-to-git`, which pushes to every configured
+remote and reports each one's outcome separately (a failure on one doesn't
+hide behind success on another). Pull on the other machines to pick it up.
 
 ## History
 

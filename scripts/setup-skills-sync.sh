@@ -4,7 +4,8 @@
 # mklink /J commands in README.md instead.
 #
 # What it does:
-#   1. Clones (or updates) skills-canonical to ~/skills-canonical
+#   1. Clones (or updates) skills-canonical to ~/skills-canonical, with both
+#      the github and gitlab remotes configured
 #   2. Symlinks ~/.claude/skills -> ~/skills-canonical (backs up the old
 #      folder first if it exists and isn't already a symlink)
 #   3. Symlinks each skill individually into ~/.codex/skills/<name>, without
@@ -17,6 +18,7 @@
 set -euo pipefail
 
 REPO_URL="https://github.com/piobogiwo/skills.git"
+GITLAB_URL="https://gitlab.mparagon.pl/src-hurtownia/skills.git"
 CANONICAL="$HOME/skills-canonical"
 
 echo "== Step 1: clone or update skills-canonical =="
@@ -25,6 +27,11 @@ if [ -d "$CANONICAL/.git" ]; then
   git -C "$CANONICAL" pull
 else
   git clone "$REPO_URL" "$CANONICAL"
+fi
+
+if ! git -C "$CANONICAL" remote get-url gitlab >/dev/null 2>&1; then
+  git -C "$CANONICAL" remote add gitlab "$GITLAB_URL"
+  echo "Added gitlab remote ($GITLAB_URL)"
 fi
 
 echo "== Step 2: link Claude Code skills =="
@@ -61,6 +68,7 @@ else
 fi
 
 echo
-echo "Done. To pull future updates from any machine:"
-echo "  git -C $CANONICAL pull"
+echo "Done. To pull future updates, run the pull-skills-from-git skill, or:"
+echo "  git -C $CANONICAL fetch --all && git -C $CANONICAL merge --ff-only origin/main"
 echo "Changes show up immediately in Claude Code / Codex - no extra copy step."
+echo "To push a change, use the push-skills-to-git skill (pushes to both remotes)."
