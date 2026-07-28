@@ -38,6 +38,8 @@ Manual, on purpose - no background auto-pull. Whenever you want the latest:
 ```bash
 git -C ~/skills-canonical pull
 ```
+or just ask Claude to run the `sync-skills` skill (`/sync-skills`), which
+does the same pull and reports what changed.
 
 ## Making changes
 
